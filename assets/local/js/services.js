@@ -1,5 +1,5 @@
 // IFFE with commonly used functions
-(function(){
+// (function(window,undefined){
     // call this function to check if capslock is on or not on key press
     function isCapslock(e){
         e = (e) ? e : window.event;
@@ -13,4 +13,4 @@
         }
         return false;
     }
-})();
+// })(window);
