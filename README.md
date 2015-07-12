@@ -2,12 +2,12 @@
 
 ## Installation Process
 
-1. Pre-requistics
-	a. nodejs
-	b. gruntjs
-	c. npm
+* Pre-requistics
+	1. nodejs
+	2. gruntjs
+	3. npm
 
-2. Installation Process
+* Installation Process
 	
 	Enter Following command in your command line interface
 
