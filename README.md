@@ -11,5 +11,5 @@
 	
 	Enter Following command in your command line interface
 
-	npm install
-	grunt
+	* npm install
+	* grunt
