@@ -6,14 +6,37 @@ module.exports = function(grunt){
 		    srclocaljs: 'assets/local/js',
 		    destjs: 'dist/js',
 		},
+		jshint: {
+		    all: ['Gruntfile.js', 'assets/local/js/*.js', 'test/**/*.js']
+		},
+		watch: {
+			options:{
+				livereload:true
+			},
+		  scripts: {
+		    files: 'assets/local/js/*.js',
+		    tasks: ['jshint'],
+		    options: {
+		      interrupt: true,
+		      reload:true
+		    },
+		  },
+		   "grunt" : {
+	            files: ['Gruntfile.js'],
+	            options: { reload: true }
+	        }
+		  css: {
+		    files: 'assets/local/css/*.css'
+		  },
+		},
 		concat:{
 			options:{
 				seperator:";\n\n;"
 			},
 			lib_and_app:{
 				files:{					
-					"dist/js/lib.js":['assets/lib/js/jquery-1.10.2.js','assets/lib/js/bootstrap.min.js','assets/lib/js/moment.min.js'],
-					"dist/js/local.js":['assets/local/js/services.js','assets/local/js/supply.js','assets/local/js/app.js']
+					"dist/lib/js/lib.js":['assets/lib/js/jquery-1.10.2.js','assets/lib/js/bootstrap.min.js','assets/lib/js/moment.min.js'],
+					"dist/lib/js/local.js":['assets/local/js/services.js','assets/local/js/supply.js','assets/local/js/app.js']
 				}
 				
 			}
@@ -22,14 +45,14 @@ module.exports = function(grunt){
 		  target: {
 		    files: [{
 		      expand: true,
-		      cwd: ['assets/local/css'],
+		      cwd: 'assets/local/css',
 		      src: ['*.css', '!*.min.css'],
-		      dest: 'release/css',
+		      dest: 'dist/local/css',
 		      ext: '.min.css'
 		    },
 		    {
 		      expand: true,
-		      cwd: ['assets/local/css'],
+		      cwd: 'assets/lib/css',
 		      src: ['*.css', '!*.min.css'],
 		      dest: 'dist/lib/css',
 		      ext: '.min.css'
@@ -42,8 +65,8 @@ module.exports = function(grunt){
 					mangle:false
 				},
 				files:{
-					"dist/js/lib.min.js":"dist/js/lib.js",
-					"dist/js/local.min.js":"dist/js/local.js"
+					"dist/lib/js/lib.min.js":"dist/lib/js/lib.js",
+					"dist/local/js/local.min.js":"dist/local/js/local.js"
 				}
 			}
 		}
@@ -52,5 +75,6 @@ module.exports = function(grunt){
 	grunt.loadNpmTasks('grunt-contrib-concat');
 	grunt.loadNpmTasks('grunt-contrib-uglify');
 	grunt.loadNpmTasks('grunt-contrib-cssmin');
-	grunt.registerTask('default',['concat','uglify']);
+	grunt.loadNpmTasks('grunt-contrib-watch');
+	grunt.registerTask('default',['jshint','cssmin','concat','uglify']);
 }
